@@ -1,11 +1,13 @@
-## My Project
+# AWS Glue Streaming Ingestion from Kafka to Apache Iceberg
 
-TODO: Fill this README out!
+This is a collecton of Amazon CDK projects to show how to directly ingest streaming data from Amazon Mananged Service for Apache Kafka (MSK) and MSK Serverless into Apache Iceberg table in S3 with AWS Glue Streaming.
 
-Be sure to:
+| Project | Description | Tags |
+|---------|-------------|------|
+| [msk-to-iceberg](./msk-to-iceberg/) | ![glue-streaming-ingestion-from-msk-to-iceberg-arch](./msk-to-iceberg/glue-streaming-data-from-kafka-to-iceberg-table.svg) | AWS Glue Streaming, Managed Service for Apache Kafka (MSK), S3, Apache Iceberg |
+| [msk-serverless-to-iceberg](./msk-serverless-to-iceberg/) | ![glue-streaming-ingestion-from-msk-serverless-to-iceberg-arch](./msk-serverless-to-iceberg/glue-streaming-data-from-msk-serverless-to-iceberg-table.svg) | AWS Glue Streaming, MSK Serverless, S3, Apache Iceberg |
 
-* Change the title in this README
-* Edit your repository description on GitHub
+Enjoy!
 
 ## Security
 
