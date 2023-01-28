@@ -190,7 +190,7 @@ command.
 
 9. Make sure the glue job to access the Iceberg table in the Glue Catalog database
 
-   Wec can get permissions by running the following command:
+   We can get permissions by running the following command:
    <pre>
    (.venv) $ aws lakeformation list-permissions | jq -r '.PrincipalResourcePermissions[] | select(.Principal.DataLakePrincipalIdentifier | endswith(":role/GlueJobRole-MSKServerless2Iceberg"))'
    </pre>
