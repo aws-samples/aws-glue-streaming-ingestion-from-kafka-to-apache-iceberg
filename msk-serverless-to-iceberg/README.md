@@ -149,7 +149,7 @@ command.
 
    * (step 2) Provision the Glue Streaming Job
 
-     </pre>
+     <pre>
      (.venv) $ cdk deploy GrantLFPermissionsOnGlueJobRole \
                           GlueStreamingJobMSKServerlessToIceberg
      </pre>
