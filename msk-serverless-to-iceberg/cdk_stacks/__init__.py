@@ -6,3 +6,4 @@ from .glue_msk_connection import GlueMSKConnectionStack
 from .glue_catalog_database import GlueCatalogDatabaseStack
 from .glue_streaming_job import GlueStreamingJobStack
 from .lakeformation_permissions import DataLakePermissionsStack
+from .s3 import S3BucketStack

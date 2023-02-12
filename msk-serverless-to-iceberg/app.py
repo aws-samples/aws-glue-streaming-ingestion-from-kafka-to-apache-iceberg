@@ -11,7 +11,8 @@ from cdk_stacks import (
   GlueMSKConnectionStack,
   GlueCatalogDatabaseStack,
   GlueStreamingJobStack,
-  DataLakePermissionsStack
+  DataLakePermissionsStack,
+  S3BucketStack
 )
 
 
@@ -20,15 +21,18 @@ APP_ENV = cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'),
 
 app = cdk.App()
 
+s3_bucket = S3BucketStack(app, 'MSKServerlessToIcebergS3Path')
+
 vpc_stack = VpcStack(app, 'MSKServerlessToIcebergStackVpc',
   env=APP_ENV
 )
+vpc_stack.add_dependency(s3_bucket)
 
 msk_stack = MskServerlessStack(app, 'MSKServerlessAsGlueStreamingJobDataSource',
   vpc_stack.vpc,
   env=APP_ENV
 )
-msk_stack.add_dependency(vpc_stack)
+msk_stack.add_dependency(s3_bucket)
 
 kafka_client_ec2_stack = KafkaClientEC2InstanceStack(app, 'MSKServerlessClientEC2Instance',
   vpc_stack.vpc,

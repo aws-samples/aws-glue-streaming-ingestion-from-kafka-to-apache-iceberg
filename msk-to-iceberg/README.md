@@ -96,28 +96,32 @@ command.
 ## Run Test
 
 1. Set up **Apache Iceberg connector for AWS Glue** to use Apache Iceberg with AWS Glue jobs.
-2. Create a MSK
+2. Create a S3 bucekt for Apache Iceberg table
+   <pre>
+   (.venv) $ cdk deploy KafkaToIcebergS3Path
+   </pre>
+3. Create a MSK
    <pre>
    (.venv) $ cdk deploy KafkaToIcebergStackVpc KafkaAsGlueStreamingJobDataSource
    </pre>
-3. Create a MSK connector for Glue Streaming Job
+4. Create a MSK connector for Glue Streaming Job
    <pre>
    (.venv) $ cdk deploy GlueMSKConnection
    </pre>
    For more information, see [References](#references) (8)
-4. Create a IAM Role for Glue Streaming Job
+5. Create a IAM Role for Glue Streaming Job
    <pre>
    (.venv) $ cdk deploy GlueStreamingMSKtoIcebergJobRole
    </pre>
-5. Set up a Kafka Client Machine
+6. Set up a Kafka Client Machine
    <pre>
    (.venv) $ cdk deploy KafkaClientEC2Instance
    </pre>
-6. Create a Glue Database for an Apache Iceberg table
+7. Create a Glue Database for an Apache Iceberg table
    <pre>
    (.venv) $ cdk deploy GlueIcebergeDatabase
    </pre>
-7. Upload **AWS SDK for Java 2.x** jar file into S3
+8. Upload **AWS SDK for Java 2.x** jar file into S3
    <pre>
    (.venv) $ wget https://repo1.maven.org/maven2/software/amazon/awssdk/aws-sdk-java/2.17.224/aws-sdk-java-2.17.224.jar
    (.venv) $ aws s3 cp aws-sdk-java-2.17.224.jar s3://aws-glue-assets-123456789012-atq4q5u/extra-jars/aws-sdk-java-2.17.224.jar
@@ -133,7 +137,7 @@ command.
    --user-jars-first true
    </pre>
    In order to do this, we might need to upload **AWS SDK for Java 2.x** jar file into S3.
-8. Create a Glue Streaming Job
+9. Create a Glue Streaming Job
 
    * (step 1) Select one of Glue Job Scripts and upload into S3
 
@@ -160,7 +164,7 @@ command.
                           GlueStreamingJobMSKtoIceberg
      </pre>
 
-9. Create a table with partitioned data in Amazon Athena
+10. Create a table with partitioned data in Amazon Athena
 
    Go to [Athena](https://console.aws.amazon.com/athena/home) on the AWS Management console.<br/>
    * (step 1) Create a database
@@ -203,7 +207,7 @@ command.
               --resource '{ "Table": {"DatabaseName": "<i>iceberg_demo_db</i>", "TableWildcard": {}} }'
       </pre>
 
-10. Make sure the glue job to access the Iceberg table in the Glue Catalog database
+11. Make sure the glue job to access the Iceberg table in the Glue Catalog database
 
     We can get permissions by running the following command:
     <pre>
@@ -217,12 +221,12 @@ command.
                --resource '{ "Table": {"DatabaseName": "<i>iceberg_demo_db</i>", "TableWildcard": {}} }'
     </pre>
 
-11. Run glue job to load data from MSK into S3
+12. Run glue job to load data from MSK into S3
     <pre>
     (.venv) $ aws glue start-job-run --job-name <i>streaming_data_from_kafka_into_iceberg_table</i>
     </pre>
 
-12. Generate streaming data
+13. Generate streaming data
 
     1. Connect the MSK client EC2 Host.
 
@@ -312,7 +316,7 @@ command.
     {"name": "Takisha", "age": 24, "m_time": "2023-12-30 12:38:23"}
     </pre>
 
-13. Check streaming data in S3
+14. Check streaming data in S3
 
     After 3~5 minutes, you can see that the streaming data have been delivered from **MSK** to **S3** and stored in a folder structure by year, month, day, and hour.
 
@@ -321,7 +325,7 @@ command.
     ![iceberg-table](./assets/iceberg-data-level-02.png)
     ![iceberg-table](./assets/iceberg-data-level-03.png)
 
-14. Run test query
+15. Run test query
 
     Enter the following SQL statement and execute the query.
     <pre>
