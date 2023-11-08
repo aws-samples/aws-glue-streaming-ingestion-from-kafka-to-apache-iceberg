@@ -120,7 +120,7 @@ command.
    </pre>
 7. Create a Glue Database for an Apache Iceberg table
    <pre>
-   (.venv) $ cdk deploy GlueIcebergeDatabase
+   (.venv) $ cdk deploy GlueIcebergDatabase
    </pre>
 8. Upload **AWS SDK for Java 2.x** jar file into S3
    <pre>
