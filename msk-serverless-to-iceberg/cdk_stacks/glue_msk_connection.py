@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# -*- encoding: utf-8 -*-
+# vim: tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+
 import boto3
 
 import aws_cdk as cdk
@@ -43,7 +46,7 @@ class GlueMSKConnectionStack(Stack):
       "KAFKA_BOOTSTRAP_SERVERS": kafka_bootstrap_servers,
       "KAFKA_SSL_ENABLED": "false"
     }
-  
+
     subnet = vpc.select_subnets(subnet_type=aws_ec2.SubnetType.PRIVATE_WITH_EGRESS).subnets[0]
 
     connection_input_property = aws_glue.CfnConnection.ConnectionInputProperty(
